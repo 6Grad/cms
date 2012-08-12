@@ -48,4 +48,12 @@
     });
   };
 
+  elements.option.render = function ($el, data) {
+    $.each(data.options, function (idx, option) {
+      $el.find(option.value).hide();
+    });
+
+    $el.find(data.selected).show();
+  };
+
 }(this));

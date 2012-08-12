@@ -206,6 +206,30 @@
     $m.find('input:first').focus();
   };
 
+  elements.option.edit = function ($el, data) {
+    var $m = getModal('option')
+      , $sel = $m.find('select')
+      , content = data.data;
+
+    $sel.children().remove();
+
+    $.each(content.options, function (idx, option) {
+      $sel.append('<option value="' + option.value + '">' + option.label+ '</option>');
+    });
+
+    $sel.find('option[value="' + content.selected + '"]').attr('selected', true);
+
+    $m.one('save', function () {
+      content.selected = $sel.val();
+      data.data = content;
+      $el.data('cms', data);
+      $el.trigger('render');
+      save(data);
+    });
+
+    $m.modal();
+  };
+
   elements.form.edit = function (el, data) {
     var $m = getModal('form')
       , $fieldsForm = $m.find('form.fields')

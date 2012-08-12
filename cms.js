@@ -7,7 +7,7 @@
     , elements = cms.elements = {};
 
   // Types of elements we have
-  $.each(['text', 'md', 'image', 'button', 'form'], function () {
+  $.each(['text', 'md', 'image', 'button', 'form', 'option'], function () {
     elements[this] = {};
   });
 
@@ -28,6 +28,7 @@
 
     $el.on('click', function (e) {
       e.preventDefault();
+      e.stopPropagation();
       var $el = $(this);
       var data = $el.data('cms');
       elements[data.type].edit($el, data);
